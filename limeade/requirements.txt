@@ -1,0 +1,10 @@
+BeautifulSoup==3.2.1
+argparse==1.2.1
+colorama==0.2.5
+dotcloud==0.9.4
+gunicorn==0.17.2
+pymongo==2.5
+pytz==2013b
+requests==0.14.2
+tornado==3.0
+wsgiref==0.1.2
