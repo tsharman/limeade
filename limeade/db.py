@@ -1,6 +1,5 @@
 from pymongo import MongoClient
-
-print "meow"
+import os
 
 if os.environ.get('PROD') == None:
   from local_settings import *
