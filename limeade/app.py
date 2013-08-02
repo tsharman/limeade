@@ -12,7 +12,9 @@ class App(tornado.web.Application):
     def __init__(self):
         tornado.web.Application.__init__(self,url_patterns, **settings)
 
-application = App()
+#application = App()
+
+application = tornado.web.Application(url_patterns, debug=True, **settings)
 
 if __name__ == "__main__":
     http_server = tornado.httpserver.HTTPServer(application)
