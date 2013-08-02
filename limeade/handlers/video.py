@@ -1,5 +1,5 @@
 import tornado.web
-from limeade.db import *
+from db import *
 import json
 from bson import json_util
 
