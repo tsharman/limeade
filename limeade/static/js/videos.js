@@ -115,6 +115,15 @@ Videos.set_current_list = function(filter) {
     }
 }
 
+
+
+// returns the next video objext to be played
+Videos.next_video = function() {
+    this.current_list_index++;
+    var next_video = this.current_list[this.current_list_index];
+    return next_video;
+}
+
 Videos.init = function() {
     
     this.featured_videos = this.get_featured_videos();

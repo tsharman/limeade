@@ -1,3 +1,7 @@
+function onReady() {
+    console.log("READY");
+}
+
 
 function onYouTubePlayerReady(playerId) {
     ytplayer = document.getElementById('youtubeplayer');
@@ -5,17 +9,25 @@ function onYouTubePlayerReady(playerId) {
 }
 
 function populate_video(video_meta, autoplay) {
+    // adding selected styling for current video and removing for old
     var video_btn = $(".video_list").children(".video_item")[Videos.current_list_index]
-    $(".selected_video").removeClass(".selected_video");
+    
+    if($(".selected_video")[0] != undefined) {
+        var current_selected_video = $(".selected_video")[0];
+
+        $(current_selected_video).removeClass("selected_video");
+    }
     $(video_btn).addClass("selected_video");
 
-    
+   
+    // generating HTML for player
     var video_player = Videos.generate_player_html(video_meta, autoplay);
     $("#player_container").html(video_player);
 
+
+    // adding title    
     var title = video_meta["title"];
     $("#title").html(unescape(title));
-    console.log(title);
 
     $("#upper_video_meta").fadeIn(200);
     $("#post_btn").attr("href", video_meta["original_post"]);
@@ -37,15 +49,14 @@ function populate_video(video_meta, autoplay) {
                     console.log("paused");
                 });
                 player.addEvent('finish', function() {
-                    console.log("FINISHED!");
-                    Videos.current_list_index++;
-                    var new_video = Videos.current_list[Videos.current_list_index];
-                    populate_video(new_video, true);
+                    populate_video(Videos.next_video(), true);
                 });
             });
         });
 
-    } 
+    }
+
+    /*
     else if(video_meta["type"] == "youtube") {
         var player = document.getElementById('youtubeplayer');
         console.log(player);
@@ -56,7 +67,7 @@ function populate_video(video_meta, autoplay) {
             }
         });
 
-    }
+    }*/
 
 
 }
