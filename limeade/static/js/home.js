@@ -124,15 +124,48 @@ $(document).ready(function() {
         $("#upper_video_meta").fadeIn(200);
     }
 
-    $("#fb_btn").click(function() {
-        console.log(Videos.current_video_id);
+    // color fading fb and twitter buttons
+    $("#fb_btn").hover(function() {
+        $(this).animate({
+            backgroundColor: "#3b5998"
+        }, 300); 
+    }, function() {
+        $(this).animate({
+            backgroundColor : "#444"
+        }, 300);
     });
-    
-    $("#twitter_btn").click(function() {
-        console.log(Videos.current_video_id);
+    $("#twitter_btn").hover(function() {
+        $(this).animate({
+            backgroundColor: "#4099ff"
+        }, 300); 
+    }, function() {
+        $(this).animate({
+            backgroundColor : "#444"
+        }, 300);
+    });
+    $("#post_btn").hover(function() {
+        $(this).animate({
+            backgroundColor: "#444"
+        }, 300); 
+    }, function() {
+        $(this).animate({
+            backgroundColor : "transparent"
+        }, 300);
     });
 
-        
+    $(".video_item").hover(function() {
+        $(this).animate({
+            backgroundColor: "#f2dfca"
+        }, 200); 
+    }, function() {
+        $(this).animate({
+            backgroundColor : "#333"
+        }, 200);
+    });
+
+
+
+
     // info btn
     $("#info_btn").click(function() {
         $("#player_container").fadeOut(200);
