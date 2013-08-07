@@ -229,16 +229,33 @@
     top: 10px;
     right: 10px;
 }
+    #sharing .button {
+        margin-right: 5px;
+    }
+    #sharing #fb_btn, #twitter_btn {
+        color: @broken_white;
+        width: 25px;
+        height: 25px;
+        padding: 5px;
+        position: relative;
+        border-radius: 25px;
+    }
+    #sharing .button img {
+        position: absolute;
+        width: 20px; height: 20px;
+        top: 50%;
+        left: 50%;
+        margin: -10px 0px 0px -10px;
+    }
     #sharing #post_btn {
-        background: white;
-        color: #444;
+        background: transparent;
+        color: @broken_white;
+        text-decoration: underline;
     }
     #sharing #fb_btn {
-        color: @broken_white;
         background: #3b5998;
     }
     #sharing #twitter_btn {
-        color: @broken_white;
         background: #4099ff;
     }
 #player_container {
