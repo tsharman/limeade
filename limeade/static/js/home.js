@@ -156,11 +156,11 @@ $(document).ready(function() {
     $(".video_item").hover(function() {
         $(this).animate({
             backgroundColor: "#f2dfca"
-        }, 200); 
+        }, 100); 
     }, function() {
         $(this).animate({
             backgroundColor : "#333"
-        }, 200);
+        }, 100);
     });
 
 
