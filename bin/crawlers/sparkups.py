@@ -1,6 +1,6 @@
 import BeautifulSoup
 import requests
-from utils import id_extractor, add_video
+from utils.utils import id_extractor, add_video
 
 
 def sparkups_crawler():
@@ -21,4 +21,9 @@ def sparkups_crawler():
             
                     if video_id == None:
                         continue
-                    add_video(video_source, video_id, title, pub_date, original_post)
+                    add_video(
+                        video_source = video_source, 
+                        video_id = video_id, 
+                        title = title, 
+                        pub_date = pub_date, 
+                        original_post = original_post)
