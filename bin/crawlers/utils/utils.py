@@ -105,9 +105,7 @@ def add_video(**kwargs):
     collected_data["blog_hits"] = 1
 
     try:
-        """
         new_video_id = db.videos.insert(collected_data)
-        """
         print collected_data
         print ("video added!" + video_id)
         return True
