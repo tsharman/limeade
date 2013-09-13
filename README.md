@@ -1,6 +1,8 @@
 Limeade
 =======
 
+[![Build Status](https://travis-ci.org/tsharman/limeade.png?branch=master)](https://travis-ci.org/tsharman/limeade)
+
 Limeade is a webapp that aggregates music videos from some blogs across the web. You can check out the live site [here](http://limeade.co/).
 
 This is a fairly simple project that I started working on to explore a new stack.
