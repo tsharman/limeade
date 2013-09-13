@@ -153,18 +153,6 @@ $(document).ready(function() {
         }, 300);
     });
 
-    $(".video_item").hover(function() {
-        $(this).animate({
-            backgroundColor: "#f2dfca"
-        }, 100); 
-    }, function() {
-        $(this).animate({
-            backgroundColor : "#333"
-        }, 100);
-    });
-
-
-
 
     // info btn
     $("#info_btn").click(function() {
