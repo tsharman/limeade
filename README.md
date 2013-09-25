@@ -36,4 +36,5 @@ There are some major things that need to be implemented in Limeade. Here is a hi
 * Artist based search. See all the music videos blogs have posted about an artist.
 * Blog based search. See all music videos a blog has posted.
 * Keyboard controls.
+* Write some actual tests.
 
