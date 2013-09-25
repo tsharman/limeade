@@ -7,9 +7,11 @@ Limeade is a webapp that aggregates music videos from some blogs across the web.
 
 This is a fairly simple project that I started working on to explore a new stack.
 
-The actual Limeade app is in the folder limeade. You will not be able to deploy the app as is. Make sure you enter the folder, create a git repo and push from there.
+The actual Limeade app is in the folder limeade. 
 
-Its built with the following components:
+If you are in the root directory start the virtualenv, install the requirements in requirements.txt and use foreman start to run it.
+
+Limeade is built with the following components:
 
 #### Client-facing web app
 
@@ -23,6 +25,15 @@ Its built with the following components:
 
 #### Web crawlers
 
-The web crawlers use a combination of the Requests library and BeautifulSoup to parse the response and extract the relevant data.
+The web crawlers use a combination of [Requests](http://docs.python-requests.org/en/latest/) and [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/) to parse the response and extract the relevant data.
 
+
+### Roadmap
+
+There are some major things that need to be implemented in Limeade. Here is a high level list of what I have planned.
+
+* <del>Title search. Search through all blog posts by title.</del>
+* Artist based search. See all the music videos blogs have posted about an artist.
+* Blog based search. See all music videos a blog has posted.
+* Keyboard controls.
 
