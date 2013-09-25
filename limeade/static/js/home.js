@@ -1,12 +1,3 @@
-function onReady() {
-    console.log("READY");
-}
-
-
-function onYouTubePlayerReady(playerId) {
-    ytplayer = document.getElementById('youtubeplayer');
-    console.log("test");
-}
 
 function populate_video(video_meta, autoplay) {
     // adding selected styling for current video and removing for old
@@ -56,20 +47,6 @@ function populate_video(video_meta, autoplay) {
 
     }
 
-    /*
-    else if(video_meta["type"] == "youtube") {
-        var player = document.getElementById('youtubeplayer');
-        console.log(player);
-        player.addEventListener('onStateChange', function(state){
-            console.log(state);
-            if(state === 0){
-                console.log("FINISHED BRO");
-            }
-        });
-
-    }*/
-
-
 }
 
 function set_video_item_listener() {
@@ -106,6 +83,8 @@ $(document).ready(function() {
 
     // filter btn listener
     $("#filters .btn").click(function() {
+        $("#search-bar-input").val("");
+        
         if($(this).is("#new")) {
            Videos.set_current_list("new"); 
         }
@@ -121,14 +100,40 @@ $(document).ready(function() {
   
     // back btn and text input event listeners for search bar 
     $("#back-btn").hide();
-    $('input#search-bar-input').keyup(function() {
+    $('input#search-bar-input').keyup(function(e) {
         if($(this).val() != "") {
             $("#back-btn").fadeIn(100);
         }
         else {
             $("#back-btn").fadeOut(100);
         }
+        
+        // check if enter key was pressed
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if(code == 13) {
+
+            // make search query
+            Videos.current_list = Videos.search($(this).val());
+            
+            // convert to html
+            var search_results_html = Videos.generate_video_list_html();
+            $("#results").html(search_results_html);
+            set_video_item_listener();
+        }
+    
+    
     });
+ 
+    // setting current new filter
+    Videos.current_list = Videos.new_videos;
+    var new_videos_html = Videos.generate_video_list_html();    
+    $("#new").addClass("selected_btn");
+    
+
+    // inserting new videos into list container
+    $("#results").append(new_videos_html);
+
+
 
     $("#back-btn").click(function() {
         $("#search-bar-input").val("");
@@ -188,10 +193,7 @@ $(document).ready(function() {
         populate_video(Videos.new_videos[0], false);
     }
     $('#vimeoplayer iframe').load(function(){
-        console.log("LOADED");
         var player = $f($(this)[0]);
-        console.log(player);
-        console.log("LOADED");
         player.addEvent('ready', function(){
             player.addEvent('pause', function() {
                 console.log("paused");

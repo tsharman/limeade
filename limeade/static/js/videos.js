@@ -6,6 +6,7 @@ Videos.featured_videos = [];
 Videos.new_videos = [];
 Videos.trending_videos = [];
 Videos.current_list_index = 0;
+Videos.search_videos = []
 
 Videos.get_video_by_id = function(video_id) {
     for (var video in this.current_list) {
@@ -44,6 +45,19 @@ Videos.get_trending_videos = function() {
         }
     }); 
     return this.trending_videos;
+}
+
+Videos.search = function(search_query) {
+    $.ajax({
+        url : "/search/?query=" + search_query,
+        type : "GET",
+        async : false,
+        context : this,
+        success : function(response) {
+            this.search_videos = JSON.parse(response);
+        }
+    }); 
+    return this.search_videos;
 }
 
 Videos.generate_player_html = function(source, autoplay) {
