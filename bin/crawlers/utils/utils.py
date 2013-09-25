@@ -74,25 +74,33 @@ def add_video(**kwargs):
     thumb = None
     
     if 'video_source' in kwargs:
-        print "VIDEO SOURCE"
         video_source = kwargs.get('video_source')
-        print video_source
         if video_source == "vimeo":
             r = requests.get("http://vimeo.com/api/v2/video/" + video_id + ".xml")
             soup = BeautifulSoup.BeautifulSoup(r.text)
             video = soup.findAll('video')[0]
+            
             title = video.title.string
             thumb = video.thumbnail_medium.string
-            print thumb
         elif video_source == "youtube":
             r = requests.get("http://www.youtube.com/watch?v=" + video_id)
             soup = BeautifulSoup.BeautifulSoup(r.text)
             video = soup.find("span", { "id" :'eow-title'})
             title = video["title"]
-          
+        
 
     if "title" is not None:
         collected_data["title"] = title
+        artist, track_name = title.split('-')
+        if artist is not None and track_name is not None:
+            print "ARTST"
+            print artist
+            print "TRACK_NAME"
+            print track_name
+            collected_data["artist"] = artist.rstrip(' ')
+            collected_data["track_name"] = track_name.lstrip(' ')
+
+
     elif "title" in kwargs:
         collected_data["title"] = kwargs.get('title')
     
