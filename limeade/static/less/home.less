@@ -141,11 +141,61 @@
             display: inline-block;
         }
 
+#search {
+    position: absolute;
+    top: 110px;
+    height: 40px;
+    width: 100%;
+    background: white;
+}
+    #search .search-bar-btn {
+        padding: 12px;
+        box-sizing: border-box;
+        -moz-box-sizing:border-box;
+    }
+        #search .search-bar-btn img {
+            width: 16px;
+        }
+    #search #search-btn {
+        background: transparent;
+        width: 40px;
+        height: 100%;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+    #search #back-btn {
+        width: 40px;
+        height: 100%;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        cursor: pointer;
+    }
+    #search #search-bar {
+        height: 100%;
+        position: absolute;
+        left: 40px;
+        right: 40px;
+        top: 0px;
+    }
+        #search #search-bar #search-bar-input {
+            height: 100%;
+            width: 100%;
+            padding: 0px;
+            border: none;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        #search #search-bar #search-bar-input:focus {
+            outline: none;
+        }
+
 #results {
     overflow-y: scroll;
     position: absolute;
     bottom: 0px;
-    top: 110px;
+    top: 150px;
     z-index: 98;
 }
 #video_list {

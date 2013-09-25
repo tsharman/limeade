@@ -118,6 +118,22 @@ $(document).ready(function() {
         $("#results").html(new_html);
         set_video_item_listener();
     });
+  
+    // back btn and text input event listeners for search bar 
+    $("#back-btn").hide();
+    $('input#search-bar-input').keyup(function() {
+        if($(this).val() != "") {
+            $("#back-btn").fadeIn(100);
+        }
+        else {
+            $("#back-btn").fadeOut(100);
+        }
+    });
+
+    $("#back-btn").click(function() {
+        $("#search-bar-input").val("");
+        $(this).fadeOut(100);
+    });
 
     // fade in if selected_id exists
     if(Videos.current_video_id !== undefined) {
