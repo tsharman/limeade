@@ -181,15 +181,20 @@ $(document).ready(function() {
         $("#about_container").delay(200).fadeIn(200);
     });
 
-    $("#blog-list").click(function() {
+    $("#blog-list-btn").click(function() {
         $("#player_container").fadeOut(200);
         $("#blog-list-container").delay(200).fadeIn(200);
     });
 
     // cancel btn
-    $("#cancel_btn").click(function() {
-        $("#about_container").fadeOut(200);
+    $(".cancel_btn").click(function() {
+        $(this).parent().parent().fadeOut(200);
         $("#player_container").delay(200).fadeIn(200);
+    });
+
+    $(".info-container").click(function() {
+          $(this).fadeOut(200);
+          $("#player_container").delay(200).fadeIn(200);
     });
 
 
