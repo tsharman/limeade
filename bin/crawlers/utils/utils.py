@@ -89,7 +89,7 @@ def add_video(**kwargs):
             title = video["title"]
         
 
-    if "title" is not None:
+    if title is not None:
         collected_data["title"] = title
         artist, track_name = title.split('-')
         if artist is not None and track_name is not None:
