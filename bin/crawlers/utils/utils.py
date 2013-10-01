@@ -78,6 +78,10 @@ def add_video(**kwargs):
         if video_source == "vimeo":
             r = requests.get("http://vimeo.com/api/v2/video/" + video_id + ".xml")
             soup = BeautifulSoup.BeautifulSoup(r.text)
+            privacy = soup.findAll('embed_privacy')[0]
+            if privacy.string == "approved":
+                print "private video!"
+                return False
             video = soup.findAll('video')[0]
             
             title = video.title.string
@@ -91,7 +95,11 @@ def add_video(**kwargs):
 
     if title is not None:
         collected_data["title"] = title
-        artist, track_name = title.split('-')
+        try:
+            artist, track_name = title.split('-')
+        except:
+            artist, track_name = None, None
+
         if artist is not None and track_name is not None:
             print "ARTST"
             print artist
