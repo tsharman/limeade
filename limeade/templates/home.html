@@ -55,8 +55,9 @@
     <div id="blog-list-container" class="info-container">
         <div id="blog-list">
             <h1>Blogs</h1>
-            <div class="blog">Blah Blah Blah</div>
-            <div class="blog">Blah Blah Blaj</div>
+            {% for blog in blogs %}
+                <a href="{{ blog['url'] }}">{{ blog['title'] }}</a>
+            {% end %}
         </div>
     </div>
     <div id="about_container" class="info-container">
