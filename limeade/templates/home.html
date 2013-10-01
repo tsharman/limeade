@@ -55,9 +55,11 @@
     <div id="blog-list-container" class="info-container">
         <div id="blog-list">
             <h1>Blogs</h1>
+            <div id="blogs">
             {% for blog in blogs %}
-                <a href="{{ blog['url'] }}">{{ blog['title'] }}</a>
+                <a target="_blank" href="{{ blog['url'] }}" class="blog button">{{ blog['title'] }}</a>
             {% end %}
+            </div>
         </div>
     </div>
     <div id="about_container" class="info-container">
