@@ -1,7 +1,7 @@
 #!/var/www/musicvideo/env/bin/python
 
 from crawler import crawler
-
+from utils.db import *
 blog_urls = [
     ( "http://www.blogotheque.net/feed/", "blogotheque" ),
     ( "http://www.gorillavsbear.net/feed/", "gorilla vs bear" ),
@@ -17,5 +17,8 @@ blog_urls = [
     ( "http://yourstru.ly/blog/feed/", "yours truly"),
 ]
 
-for url in blog_urls:
-    crawler(url[0])
+database = db_client()
+blogs = database.blogs.find()
+
+for blog in blogs:
+    crawler(blog["rss_url"])
