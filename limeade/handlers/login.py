@@ -9,7 +9,8 @@ class HomeHandler(tornado.web.RequestHandler):
         database = db_client()
         if collection_id != None:
             video = database.videos.find_one({"_id" : ObjectId(collection_id)})
-            self.render("home.html", video=video)
+            blogs = database.blogs.find()
+            self.render("home.html", video=video, blogs=blogs)
         else:
             blogs = database.blogs.find()
             self.render("home.html", video=None, blogs=blogs)
