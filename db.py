@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import os
 
-if os.environ.get('PROD') == None or os.environ.get('TRAVIS') == None:
+if os.environ.get('PROD') == None and os.environ.get('TRAVIS') == None:
   from local_settings import *
 else:
   mongo_db_uri = os.environ.get('MONGO_DB_URI')
