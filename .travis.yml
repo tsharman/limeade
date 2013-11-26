@@ -6,6 +6,7 @@ services:
   - mongodb
 
 env:
+  - TRAVIS=True
   - MONGO_DB_URI=127.0.0.1
   - MONGO_DB_PORT=27017
 
