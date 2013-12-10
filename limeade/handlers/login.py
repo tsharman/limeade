@@ -1,4 +1,5 @@
 import tornado.web
+import tornado.auth
 from db import *
 import json
 from bson import json_util
@@ -19,7 +20,11 @@ class SignUpHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("home.html")
 
-class LoginHandler(tornado.web.RequestHandler):
+class TwitterLoginHandler(twitter.web.RequestHandler, tornado.auth.TwitterMixin):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
-        self.render("home.html")
-
+        if self.get_argument("oauth_token", None):
+            user = yield self.get_authenticated_user()
+        else:
+            yield self.authorize_redirect()

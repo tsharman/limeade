@@ -10,4 +10,5 @@ url_patterns = [
     (r"/videos/$", VideoListHandler),
     (r"/search/$", VideoSearchHandler),
     (r"/static/*", tornado.web.StaticFileHandler, dict(path= settings['static_path'])),
+    (r"/twitter-login/$", TwitterLoginHander, { "twitter_consumer_key" : "", "twitter_consumer_secret" : ""}),
 ]
