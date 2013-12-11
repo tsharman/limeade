@@ -105,26 +105,26 @@
         </div>
     </div>
     <div id="right_panel">
-        <div id="blog-list-btn" class="button">Blog List</div> 
-        <div id="sharing">
-            <a id="post_btn"
-                {% if video %}
-                href="{{ video['original_post'] }}"
-                {% end %}
-                class="button">Original Post</a>
-            <a id="fb_btn" class="button" target="_blank" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=300')" >
-                <img src="/static/img/facebook.png" />
-            </a>
-            <a id="twitter_btn" class="button" target="_blank" onclick="return !window.open(this.href, 'Twitter', 'width=640,height=300')" >
-                <img src="/static/img/twitter.png"/>
-            </a>
-        </div>
-        <div id="upper_video_meta">
+      <div id="blog-list-btn" class="button">Blog List</div> 
+       <div id="upper_video_meta">
             <h2 id="title">
                 {% if video %}
                     {% raw video['title'] %}
                 {% end %}
             </h2>
+            <div id="sharing">
+                <a id="post_btn"
+                    {% if video %}
+                    href="{{ video['original_post'] }}"
+                    {% end %}
+                    class="button">Original Post</a>
+                <a id="fb_btn" class="button" target="_blank" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=300')" >
+                    <img src="/static/img/facebook.png" />
+                </a>
+                <a id="twitter_btn" class="button" target="_blank" onclick="return !window.open(this.href, 'Twitter', 'width=640,height=300')" >
+                    <img src="/static/img/twitter.png"/>
+                </a>
+            </div>
         </div>
         <div id="player_container">
         {% if video %}
