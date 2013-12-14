@@ -1,5 +1,5 @@
 
-from handlers.login import HomeHandler, SignUpHandler, LoginHandler
+from handlers.login import HomeHandler, SignUpHandler, TwitterLoginHandler
 from handlers.video import VideoListHandler, VideoSearchHandler
 import tornado.web
 from settings import settings
@@ -10,5 +10,5 @@ url_patterns = [
     (r"/videos/$", VideoListHandler),
     (r"/search/$", VideoSearchHandler),
     (r"/static/*", tornado.web.StaticFileHandler, dict(path= settings['static_path'])),
-    (r"/twitter-login/$", TwitterLoginHander, { "twitter_consumer_key" : "", "twitter_consumer_secret" : ""}),
+    (r"/twitter-login/$", TwitterLoginHandler, { "twitter_consumer_key" : "", "twitter_consumer_secret" : ""}),
 ]

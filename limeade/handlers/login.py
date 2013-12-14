@@ -20,7 +20,8 @@ class SignUpHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("home.html")
 
-class TwitterLoginHandler(twitter.web.RequestHandler, tornado.auth.TwitterMixin):
+
+class TwitterLoginHandler(tornado.web.RequestHandler, tornado.auth.TwitterMixin):
     @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
