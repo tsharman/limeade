@@ -13,6 +13,7 @@ settings['static_path'] = os.path.join(ROOT, 'static')
 settings['xsrf_cookies'] = True
 settings['template_loader'] = tornado.template.Loader(TEMPLATE_ROOT)
 
-from local_settings import *
-settings['twitter_consumer_key'] = twitter_consumer_key
-settings['twitter_consumer_secret'] = twitter_consumer_secret
+if os.environ.get('PROD') == None and os.environ.get('TRAVIS') == None:
+    from local_settings import *
+    settings['twitter_consumer_key'] = twitter_consumer_key
+    settings['twitter_consumer_secret'] = twitter_consumer_secret
