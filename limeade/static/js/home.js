@@ -77,7 +77,6 @@ $(document).ready(function() {
     // inserting new videos into list container
     $("#results").append(new_videos_html);
 
-
     // video_item listener
     set_video_item_listener();
 

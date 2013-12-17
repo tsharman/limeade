@@ -20,9 +20,12 @@ Videos.get_video_by_id = function(video_id) {
 Videos.get_featured_videos = function() {
     return [];
 };
-Videos.get_new_videos = function() {
+Videos.get_new_videos = function(pageNo) {
+    if (!pageNo) {
+        pageNo = 1;
+    }
     $.ajax({
-        url : "/videos/?filter=new",
+        url : "/videos/?filter=new&page=" + pageNo,
         type : "GET",
         async: false,
         context : this,
