@@ -92,8 +92,13 @@ $(document).ready(function() {
         }
         $(".selected_btn").removeClass("selected_btn");
         $(this).addClass("selected_btn");
+        
+        // generating video list
         var new_html = Videos.generate_video_list_html();
+        
+        // adding new html to results
         $("#results").html(new_html);
+
         set_video_item_listener();
     });
   
