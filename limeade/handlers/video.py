@@ -28,7 +28,7 @@ class VideoListHandler(tornado.web.RequestHandler):
     def get(self):
         database = db_client()
         filter = self.get_argument("filter", default=None, strip=False)
-        pageNo = self.get_argument("page")
+        pageNo = self.get_argument("page", default=1)
         resultsCount = 100
         if filter == "new":
             videos = database.videos.find().sort( [['_id', -1]] ).skip((int(pageNo) - 1) * resultsCount).limit(resultsCount)
