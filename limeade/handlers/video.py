@@ -27,8 +27,10 @@ class VideoListHandler(tornado.web.RequestHandler):
     def get(self):
         database = db_client()
         filter = self.get_argument("filter", default=None, strip=False)
+        pageNo = self.get_argument("page")
+        resultsCount = 100
         if filter == "new":
-            videos = database.videos.find().sort( [['_id', -1]] )
+            videos = database.videos.find().sort( [['_id', -1]] ).skip((int(pageNo) - 1) * resultsCount).limit(resultsCount)
         elif filter == "trending":
             videos = database.videos.find().sort( [['blog_hits', -1]])
     
