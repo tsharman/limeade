@@ -127,16 +127,6 @@ $(document).ready(function() {
     
     
     });
- 
-    // setting current new filter
-    Videos.current_list = Videos.new_videos;
-    var new_videos_html = Videos.generate_video_list_html();    
-    $("#new").addClass("selected_btn");
-    
-
-    // inserting new videos into list container
-    $("#results").append(new_videos_html);
-
 
 
     $("#back-btn").click(function() {
@@ -213,5 +203,21 @@ $(document).ready(function() {
                 console.log("paused");
             });
         });
+    });
+
+    
+    // add click listener to load_more_btn
+    $("#load_more_btn").hide();
+
+    
+    // detect when use hits end of video results
+    // display "more video load" button
+    $("#results").scroll(function() {
+        if(($(this).scrollTop() + $(this).height()) >= ($($(".video_list")[0]).height() - 200)) {
+            $("#load_more_btn").fadeIn();
+        }
+        else {
+            $("#load_more_btn").fadeOut();
+        }
     });
 });
