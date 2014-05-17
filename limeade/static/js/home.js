@@ -20,7 +20,7 @@ var Limeade = {
         $("#upper_video_meta").fadeIn(200);
         $("#post_btn").attr("href", video_meta["original_post"]);
 
-        if(video_meta["_id"]["$oid"]) {
+        if(video_meta["_id"]) {
             var tweetShareUrl = "https://twitter.com/intent/tweet?text=" + "Jamming to http://limeade.co/v/" + video_meta["_id"]["$oid"];
             $("#twitter_btn").attr("href", tweetShareUrl);
         }
