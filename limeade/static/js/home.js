@@ -20,8 +20,10 @@ var Limeade = {
         $("#upper_video_meta").fadeIn(200);
         $("#post_btn").attr("href", video_meta["original_post"]);
 
-        var tweetShareUrl = "https://twitter.com/intent/tweet?text=" + "Jamming to http://limeade.co/v/" + video_meta["_id"]["$oid"];
-        $("#twitter_btn").attr("href", tweetShareUrl);
+        if(video_meta["_id"]["$oid"]) {
+            var tweetShareUrl = "https://twitter.com/intent/tweet?text=" + "Jamming to http://limeade.co/v/" + video_meta["_id"]["$oid"];
+            $("#twitter_btn").attr("href", tweetShareUrl);
+        }
         
         var fbShareUrl = "http://www.facebook.com/sharer.php?u=http://limeade.co/v/" + video_meta["_id"]["$oid"];
         $("#fb_btn").attr("href", fbShareUrl);
@@ -48,7 +50,6 @@ var Limeade = {
         var that = this;
         $(".video_item").on("click", function() {
             $(".selected_video").removeClass("selected_video");
-            $(this).addClass("selected_video");
             Videos.current_video_id = $(this).attr("data-video-id");
             Videos.current_list_index = $(this).index();
             var video_meta = Videos.get_video_by_id(Videos.current_video_id);
@@ -117,7 +118,7 @@ $(document).ready(function() {
             // convert to html
             var search_results_html = Videos.generate_video_list_html();
             $("#results_inner").html(search_results_html);
-            set_video_item_listener();
+            Limeade.set_video_item_listener();
         }
     
     
@@ -204,17 +205,21 @@ $(document).ready(function() {
     // add click listener to load_more_btn
     $("#load_more_btn").hide();
     $("#load_more_btn").click(function() {
+        Videos.current_page = Videos.current_page + 1;
+        
         var more_videos;
+        
         if(Videos.current_collection === "new") {
-            Videos.current_page = Videos.current_page + 1;
-
             more_videos = Videos.get_new_videos(Videos.current_page);
-            var more_videos_html = Videos.generate_video_list_html(more_videos);
-            console.log(more_videos);
-            console.log(more_videos_html);
         }
+        else if(Videos.current_collection === "trending") {
+            more_videos = Videos.get_trending_videos(Videos.current_page);
+        }
+
         var more_videos_html = Videos.generate_video_list_html(more_videos);
         $("#results_inner").append(more_videos_html);
+        console.log("video item listener");
+        Limeade.set_video_item_listener();
     });
 
     
