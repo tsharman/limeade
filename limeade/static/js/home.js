@@ -70,7 +70,7 @@ $(document).ready(function() {
     
 
     // inserting new videos into list container
-    $("#results").append(new_videos_html);
+    $("#results_inner").append(new_videos_html);
 
     // video_item listener
     Limeade.set_video_item_listener();
@@ -116,7 +116,7 @@ $(document).ready(function() {
             
             // convert to html
             var search_results_html = Videos.generate_video_list_html();
-            $("#results").html(search_results_html);
+            $("#results_inner").html(search_results_html);
             set_video_item_listener();
         }
     
@@ -204,14 +204,24 @@ $(document).ready(function() {
     // add click listener to load_more_btn
     $("#load_more_btn").hide();
     $("#load_more_btn").click(function() {
-        console.log("hello");
+        var more_videos;
+        if(Videos.current_collection === "new") {
+            Videos.current_page = Videos.current_page + 1;
+
+            more_videos = Videos.get_new_videos(Videos.current_page);
+            var more_videos_html = Videos.generate_video_list_html(more_videos);
+            console.log(more_videos);
+            console.log(more_videos_html);
+        }
+        var more_videos_html = Videos.generate_video_list_html(more_videos);
+        $("#results_inner").append(more_videos_html);
     });
 
     
     // detect when use hits end of video results
     // display "more video load" button
     $("#results").scroll(function() {
-        if(($(this).scrollTop() + $(this).height()) >= ($($(".video_list")[0]).height() - 200)) {
+        if(($(this).scrollTop() + $(this).height()) >= ($("#results_inner").height() - 200)) {
             $("#load_more_btn").fadeIn();
         }
         else {
