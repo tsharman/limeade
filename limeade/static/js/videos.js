@@ -7,6 +7,8 @@ Videos.new_videos = [];
 Videos.trending_videos = [];
 Videos.current_list_index = 0;
 Videos.search_videos = []
+Videos.current_collection = "new";
+Videos.current_page = 1;
 
 Videos.get_video_by_id = function(video_id) {
     for (var video in this.current_list) {
@@ -20,9 +22,13 @@ Videos.get_video_by_id = function(video_id) {
 Videos.get_featured_videos = function() {
     return [];
 };
-Videos.get_new_videos = function() {
+Videos.get_new_videos = function(pageNo) {
+    Videos.current_collection = "new"; 
+    if (!pageNo) {
+        pageNo = 1;
+    }
     $.ajax({
-        url : "/videos/?filter=new",
+        url : "/videos/?filter=new&page=" + pageNo,
         type : "GET",
         async: false,
         context : this,
@@ -34,7 +40,7 @@ Videos.get_new_videos = function() {
     return this.new_videos;
 };
 Videos.get_trending_videos = function() {
-    
+    Videos.current_collection = "trending"; 
     $.ajax({
         url : "/videos/?filter=trending",
         type : "GET",
@@ -62,7 +68,6 @@ Videos.search = function(search_query) {
 
 Videos.generate_player_html = function(source, autoplay) {
     var raw_html;
-    console.log(autoplay);
     if (autoplay === undefined) {
         source["autoplay"] = "1";
     }
@@ -107,14 +112,13 @@ Videos.generate_video_list_html = function(videos_json) {
         videos_json = this.current_list;
     }
     
-    var listContainer = $('<div>').addClass('video_list');
+    var listContainer = $('<div>');
     for (var video in videos_json) {
         var video_html = this.generate_video_item_html(videos_json[video]);
         listContainer.append(video_html);
     }
 
-    var wrapper = $('<div>').append(listContainer);
-    return wrapper.html();
+    return listContainer.html();
 }
 
 Videos.set_current_list = function(filter) {

@@ -14,6 +14,7 @@
     text-decoration: none;
     position: relative;
     height: 15px;
+    cursor: pointer;
 }
     .button img {
         display: inline-block;
@@ -170,6 +171,21 @@
             display: inline-block;
         }
 
+#load_more_btn {
+    background: #eee;
+    color: #444;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    padding: 15px 0px;
+    z-index: 99;
+}
+    #load_more_btn:hover {
+        color: #999;
+    }
+
 #search {
     position: absolute;
     top: 110px;
@@ -226,12 +242,7 @@
     bottom: 0px;
     top: 150px;
     z-index: 98;
-}
-#video_list {
-    position: absolute;
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
+    padding-bottom: 50px;
 }
 .video_item {
     width: 280px;
