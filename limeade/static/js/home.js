@@ -1,65 +1,60 @@
+var Limeade = {
+    populate_video : function(video_meta, autoplay) {
+        // adding selected styling for current video and removing for old
+        var video_btn = $(".video_list").children(".video_item")[Videos.current_list_index]
+        
+        if($(".selected_video")[0] != undefined) {
+            var current_selected_video = $(".selected_video")[0];
+            $(current_selected_video).removeClass("selected_video");
+        }
+        $(video_btn).addClass("selected_video");
+       
+        // generating HTML for player
+        var video_player = Videos.generate_player_html(video_meta, autoplay);
+        $("#player_container").html(video_player);
 
-function populate_video(video_meta, autoplay) {
-    // adding selected styling for current video and removing for old
-    var video_btn = $(".video_list").children(".video_item")[Videos.current_list_index]
-    
-    if($(".selected_video")[0] != undefined) {
-        var current_selected_video = $(".selected_video")[0];
+        // adding title    
+        var title = video_meta["title"];
+        $("#title").html(unescape(title));
 
-        $(current_selected_video).removeClass("selected_video");
-    }
-    $(video_btn).addClass("selected_video");
+        $("#upper_video_meta").fadeIn(200);
+        $("#post_btn").attr("href", video_meta["original_post"]);
 
-   
-    // generating HTML for player
-    var video_player = Videos.generate_player_html(video_meta, autoplay);
-    $("#player_container").html(video_player);
+        var tweetShareUrl = "https://twitter.com/intent/tweet?text=" + "Jamming to http://limeade.co/v/" + video_meta["_id"]["$oid"];
+        $("#twitter_btn").attr("href", tweetShareUrl);
+        
+        var fbShareUrl = "http://www.facebook.com/sharer.php?u=http://limeade.co/v/" + video_meta["_id"]["$oid"];
+        $("#fb_btn").attr("href", fbShareUrl);
 
-
-    // adding title    
-    var title = video_meta["title"];
-    $("#title").html(unescape(title));
-
-    $("#upper_video_meta").fadeIn(200);
-    $("#post_btn").attr("href", video_meta["original_post"]);
-
-    var tweetShareUrl = "https://twitter.com/intent/tweet?text=" + "Jamming to http://limeade.co/v/" + video_meta["_id"]["$oid"];
-    $("#twitter_btn").attr("href", tweetShareUrl);
-
-
-    var fbShareUrl = "http://www.facebook.com/sharer.php?u=http://limeade.co/v/" + video_meta["_id"]["$oid"];
-    $("#fb_btn").attr("href", fbShareUrl);
-
-
-    // onfinish event
-    if(video_meta["type"] == "vimeo") {
-        $('#vimeoplayer').load(function(){
-            var player = $f(this);
-            player.addEvent('ready', function(){
-                player.addEvent('pause', function() {
-                    console.log("paused");
-                });
-                player.addEvent('finish', function() {
-                    populate_video(Videos.next_video(), true);
+        // onfinish event
+        if(video_meta["type"] == "vimeo") {
+            $('#vimeoplayer').load(function(){
+                var player = $f(this);
+                var that = this;
+                player.addEvent('ready', function(){
+                    player.addEvent('pause', function() {
+                        console.log("paused");
+                    });
+                    player.addEvent('finish', function() {
+                        that.populate_video(Videos.next_video(), true);
+                    });
                 });
             });
+
+        }
+    },
+    set_video_item_listener : function() {
+        // temp solution. live() was deprecated
+        var that = this;
+        $(".video_item").on("click", function() {
+            $(".selected_video").removeClass("selected_video");
+            $(this).addClass("selected_video");
+            Videos.current_video_id = $(this).attr("data-video-id");
+            Videos.current_list_index = $(this).index();
+            var video_meta = Videos.get_video_by_id(Videos.current_video_id);
+            that.populate_video(video_meta);
         });
-
     }
-
-}
-
-function set_video_item_listener() {
-    // temp solution. live() was deprecated
-    $(".video_item").on("click", function() {
-        $(".selected_video").removeClass("selected_video");
-        $(this).addClass("selected_video");
-        Videos.current_video_id = $(this).attr("data-video-id");
-        Videos.current_list_index = $(this).index();
-        var video_meta = Videos.get_video_by_id(Videos.current_video_id);
-        populate_video(video_meta);
-    });
-
 }
 
 
@@ -78,7 +73,7 @@ $(document).ready(function() {
     $("#results").append(new_videos_html);
 
     // video_item listener
-    set_video_item_listener();
+    Limeade.set_video_item_listener();
 
     // filter btn listener
     $("#filters .btn").click(function() {
@@ -99,7 +94,7 @@ $(document).ready(function() {
         // adding new html to results
         $("#results").html(new_html);
 
-        set_video_item_listener();
+        Limeade.set_video_item_listener();
     });
   
     // back btn and text input event listeners for search bar 
@@ -194,7 +189,7 @@ $(document).ready(function() {
 
     // populating video
     if(Videos.current_video_id === undefined) {
-        populate_video(Videos.new_videos[0], false);
+        Limeade.populate_video(Videos.new_videos[0], false);
     }
     $('#vimeoplayer iframe').load(function(){
         var player = $f($(this)[0]);
@@ -208,6 +203,9 @@ $(document).ready(function() {
     
     // add click listener to load_more_btn
     $("#load_more_btn").hide();
+    $("#load_more_btn").click(function() {
+        console.log("hello");
+    });
 
     
     // detect when use hits end of video results
