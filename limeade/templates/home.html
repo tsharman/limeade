@@ -28,6 +28,8 @@
     ga('create', 'UA-40085909-1', 'limeade.co');
     ga('send', 'pageview');
     </script>
+
+    <!-- Youtube item template -->
     <script id="youtube-item-template" type="text/x-handlebars-template">
     <div class="video_item" data-video-id="{{! video_id }}">
         <div class="thumb_container">
@@ -36,6 +38,8 @@
         <div class="video_title">{{{! title }}}</div>
     </div>
     </script>
+
+    <!-- Vimeo item template -->
     <script id="vimeo-item-template" type="text/x-handlebars-template">
     <div class="video_item" data-video-id="{{! video_id }}">
         <div class="thumb_container">
@@ -44,9 +48,13 @@
         <div class="video_title">{{{! title }}}</div>
     </div>
     </script>
+    
+    <!-- Youtube player template -->
     <script id="youtube-player-template" type="text/x-handlebars-template">
     <iframe id="youtubeplayer" width="640" height="360" src="http://www.youtube.com/embed/{{! video_id }}?showinfo=0&version=3&enablejsapi=1&playerapiid=youtubeplayer&autoplay={{! autoplay }}" frameborder="0" allowfullscreen allowscriptaccess="always"></iframe>  
     </script>
+
+    <!-- Vimeo player template -->
     <script id="vimeo-player-template" type="text/x-handlebars-template">
     <iframe id="vimeoplayer" width="640" height="360" src="http://player.vimeo.com/video/{{! video_id }}?title=0&api=1&player_id=vimeoplayer&autoplay={{! autoplay }}" frameborder="0" allowfullscreen allowscriptaccess="always"></iframe>
     </script>
@@ -68,7 +76,7 @@
             <h1>About</h1>
             <p>Limeade is a music video discovery service. It aggregates music videos from some AMAZING music blogs and bring them all here for your viewing pleasure.</p>
             <h3>How does it work?</h3>
-            <p>It's simple. Limeade keeps track of a hand picked selection of music blogs and pull embedded video links from sources like Vimeo and Youtube. These videos are stored in our database and show up under the "Fresh" tab. Some math is done on the backend to calculate what videos are trending and it eventually makes its way to the "Trending" list.</p>
+            <p>It's simple. Limeade keeps track of a hand picked selection of music blogs and pulls embedded video links from sources like Vimeo and Youtube. These videos are stored in our database and show up under the "Fresh" tab. Some math is done on the backend to calculate what videos are trending and it eventually makes its way to the "Trending" list.</p>
         </div>
     </div>
     <div id="left_panel">
